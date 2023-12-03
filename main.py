@@ -42,9 +42,16 @@ from diffusers.utils import load_image
 from PIL import Image
 
 # Create pipeline
-pipeline = AutoPipelineForImage2Image.from_pretrained(
-    "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
-).to("cuda")
+gpu = False
+if gpu:
+    pipeline = AutoPipelineForImage2Image.from_pretrained(
+        "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
+        ).to("cuda")
+else:
+    pipeline = AutoPipelineForImage2Image.from_pretrained(
+        "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float32, variant="fp32", use_safetensors=True
+        ).to("cpu")
+breakpoint()
 
 # Prepare image
 #url = "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/img2img-init.png"

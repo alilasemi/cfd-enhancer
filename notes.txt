@@ -1,4 +1,0 @@
-pip install diffusers --upgrade
-pip install transformers
-pip install accelerate
-mkdir output/
