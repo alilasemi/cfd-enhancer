@@ -38,7 +38,6 @@
 
 import torch
 from diffusers import AutoPipelineForImage2Image
-from diffusers.utils import load_image
 from PIL import Image
 
 # Create pipeline
@@ -54,8 +53,6 @@ else:
 breakpoint()
 
 # Prepare image
-#url = "https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/diffusers/img2img-init.png"
-#init_image = load_image(url)
 init_image = Image.open("coarse.png")
 
 # Choose prompt
