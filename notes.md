@@ -13,6 +13,7 @@
 # Run This on the Google Cloud Instance
     pip install transformers accelerate datasets
     pip install --upgrade diffusers
+    pip uninstall torch_xla
     git clone https://github.com/huggingface/diffusers ; cd diffusers ; git checkout 1477865e48 ; pip install . ; cd ..
     mkdir output/
     accelerate config

@@ -41,7 +41,7 @@ from diffusers import AutoPipelineForImage2Image
 from PIL import Image
 
 # Create pipeline
-gpu = False
+gpu = True
 if gpu:
     pipeline = AutoPipelineForImage2Image.from_pretrained(
         "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16, variant="fp16", use_safetensors=True
@@ -50,7 +50,9 @@ else:
     pipeline = AutoPipelineForImage2Image.from_pretrained(
         "runwayml/stable-diffusion-v1-5", torch_dtype=torch.float32, variant="fp32", use_safetensors=True
         ).to("cpu")
-breakpoint()
+
+# load attention processors
+pipeline.unet.load_attn_procs('./')
 
 # Prepare image
 init_image = Image.open("coarse.png")
