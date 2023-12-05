@@ -1,5 +1,6 @@
 import random
 import math
+import os
 
 import datasets
 import numpy as np
@@ -39,9 +40,6 @@ def main():
     pipe = AutoPipelineForImage2Image.from_pretrained(
         pretrained_model_name_or_path, torch_dtype=weight_dtype, variant="fp16", use_safetensors=True
         ).to("cuda")
-
-    # Prepare image
-    init_image = Image.open("coarse.png")
 
     # -- Training -- #
     # Load scheduler, tokenizer and models
@@ -120,13 +118,10 @@ def main():
         eps=adam_epsilon,
     )
 
-    # Get the datasets: you can either provide your own training and evaluation files (see below)
-    # or specify a Dataset from the hub (the dataset will be downloaded automatically from the datasets Hub).
-
+    # Read the training data from file
     data_files = {}
-    #train_data_dir = './'
-    #data_files["train"] = os.path.join(train_data_dir, "**")
-    data_files["train"] = ['coarse.png', 'metadata.jsonl']
+    train_data_dir = './train_data'
+    data_files["train"] = os.path.join(train_data_dir, "**")
     dataset = load_dataset("imagefolder", data_files=data_files, cache_dir=None)
     # See more about loading custom images at
     # https://huggingface.co/docs/datasets/v2.4.0/en/image_load#imagefolder
@@ -184,7 +179,7 @@ def main():
         return {"pixel_values": pixel_values, "input_ids": input_ids}
 
     # DataLoaders creation:
-    train_batch_size = 1
+    train_batch_size = 3
     train_dataloader = torch.utils.data.DataLoader(
         train_dataset,
         shuffle=True,

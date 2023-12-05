@@ -52,7 +52,7 @@ else:
         ).to("cpu")
 
 # load attention processors
-# pipeline.unet.load_attn_procs('./')
+pipeline.unet.load_attn_procs('./')
 
 # Prepare image
 init_image = Image.open("coarse.png")
@@ -66,7 +66,7 @@ lines = [f'prompt = "{prompt}"\n', f'n_prompt = "{n_prompt}"']
 with open('output/prompt.txt', 'w') as f:
     f.writelines(lines)
 
-strengths = [.2, .5, .8]
+strengths = [.2, .25, .3, .35, .4, .45, .5]
 # Loop over strengths
 for strength in strengths:
     # pass prompt and image to pipeline

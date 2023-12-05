@@ -3,18 +3,17 @@ import os
 import sys
 
 
-def main(path):
+def main(path, geometry):
     pattern = os.path.join(path, '**/*.png')
     paths = glob.glob(pattern, recursive=True)
-    name = os.path.split(path)[0]
-    with open(f'{name}_metadata.json', 'w') as fh:
+    with open(f'train_data/metadata.jsonl', 'w') as fh:
         for path in paths:
-            print(path.split('/'))
-            name, res, var = path.split('/')[:3]
-            line = f'{{"file_name": "{path}", "text": "flow over {res} {name}"}}\n'
+            split = path.split('/')
+            print(split)
+            line = f'{{"file_name": "{split[1]}", "text": "realistic fluid dynamics, flow over {geometry}"}}\n'
             fh.write(line)
-    #    pass
 
 if __name__ == '__main__':
     path = sys.argv[1]
-    main(path)
+    geometry = sys.argv[2]
+    main(path, geometry)
