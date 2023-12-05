@@ -52,7 +52,7 @@ else:
         ).to("cpu")
 
 # load attention processors
-pipeline.unet.load_attn_procs('./')
+# pipeline.unet.load_attn_procs('./')
 
 # Prepare image
 init_image = Image.open("coarse.png")

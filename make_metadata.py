@@ -11,7 +11,7 @@ def main(path):
         for path in paths:
             print(path.split('/'))
             name, res, var = path.split('/')[:3]
-            line = f'{{"file_name": "{path}", "text": flow over {res} {name} showing {var}""}}\n'
+            line = f'{{"file_name": "{path}", "text": "flow over {res} {name}"}}\n'
             fh.write(line)
     #    pass
 
