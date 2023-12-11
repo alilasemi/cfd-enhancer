@@ -1,0 +1,2 @@
+prompt = "realistic, detailed, 8k"
+n_prompt = ""
