@@ -10,10 +10,16 @@ def main(path, geometry):
         for path in paths:
             split = path.split('/')
             print(split)
-            line = f'{{"file_name": "{split[1]}", "text": "realistic fluid dynamics, flow over {geometry}"}}\n'
+            if geometry is None:
+                line = f'{{"file_name": "{split[1]}", "text": "realistic fluid dynamics, turbulent flow"}}\n'
+            else:
+                line = f'{{"file_name": "{split[1]}", "text": "realistic fluid dynamics, flow over {geometry}"}}\n'
             fh.write(line)
 
 if __name__ == '__main__':
     path = sys.argv[1]
-    geometry = sys.argv[2]
+    if len(sys.argv) == 2:
+        geometry = None
+    else:
+        geometry = sys.argv[2]
     main(path, geometry)
